@@ -40,7 +40,7 @@ a {
   color: var(--brand);
 }
 .hero {
-  min-height: 520px;
+  min-height: 320px;
   display: flex;
   align-items: center;
   color: white;
@@ -59,7 +59,7 @@ a {
   font-size: 1.15rem;
 }
 .section-space {
-  padding: 76px 0;
+  padding: 20px 0;
 }
 .section-kicker {
   color: var(--brand);
@@ -135,7 +135,7 @@ a {
     min-height: 440px;
   }
   .section-space {
-    padding: 52px 0;
+    padding: 15px 0;
   }
   .admin-sidebar {
     min-height: auto;

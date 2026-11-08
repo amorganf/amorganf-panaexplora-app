@@ -9,11 +9,10 @@ export const metadata: Metadata = {
   title: { default: "PanaExplora", template: "%s | PanaExplora" },
   description:
     "Descubre lugares turísticos de Panamá: playas, montañas, cascadas, cultura y experiencias para viajar.",
-  /*alternates: { canonical: "/" }, Quítalo del layout y ponlo en cada página con su propia ruta.*/
-  robots: { index: true, follow: true },
   openGraph: { type: "website", locale: "es_PA", siteName: "PanaExplora" },
 };
 
+// Layout raíz: solo lo común a TODO el sitio (público y admin).
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" data-bs-theme="light">

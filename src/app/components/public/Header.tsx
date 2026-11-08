@@ -2,7 +2,7 @@ import Link from "next/link";
 export default function Header() {
   return (
     <header className="site-header sticky-top">
-      <nav className="navbar navbar-expand-lg container py-3">
+      <nav className="navbar navbar-expand-lg container">
         <Link className="navbar-brand brand-mark fs-4" href="/">
           PanaExplora
         </Link>

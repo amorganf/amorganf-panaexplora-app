@@ -172,7 +172,7 @@ export default async function HomeSections({
                       <div key={c.id} className="col-sm-6 col-lg-3">
                         <Link
                           href={`/categoria/${c.slug}`}
-                          className="d-block bg-light border rounded-4 p-4 h-100 text-decoration-none"
+                          className="d-block bg-light border rounded-4 p-2 h-100 text-decoration-none"
                         >
                           <h3 className="h5 fw-bold">{c.name}</h3>
                           <span className="text-secondary">

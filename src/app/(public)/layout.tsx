@@ -1,24 +1,23 @@
-import type { Metadata } from "next";
-import "../globals.css";
-import BootstrapClient from "../components/public/BootstrapClient";
+import Header from "../components/public/Header";
+import Footer from "../components/public/Footer";
+import CookieConsent from "../components/CookieConsent";
+import { getTrackingConfig } from "../lib/data/settings";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  ),
-  title: { default: "PanaExplora", template: "%s | PanaExplora" },
-  description:
-    "Descubre lugares turísticos de Panamá: playas, montañas, cascadas, cultura y experiencias para viajar.",
-  openGraph: { type: "website", locale: "es_PA", siteName: "PanaExplora" },
-};
+// Los ajustes se leen de la base de datos como máximo cada 5 minutos.
+// Al guardarlos desde el admin, llama a revalidatePath("/", "layout")
+// para que el cambio se aplique al instante.
+export const revalidate = 300;
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+// Layout de la parte pública: cabecera, pie y banner de cookies.
+export default async function PublicLayout({ children }: LayoutProps<"/">) {
+  const { analyticsId, adsenseClient } = await getTrackingConfig();
+
   return (
-    <html lang="es" data-bs-theme="light">
-      <body>
-        {children}
-        <BootstrapClient />
-      </body>
-    </html>
+    <>
+      <Header />
+      {children}
+      <Footer />
+      <CookieConsent analyticsId={analyticsId} adsenseClient={adsenseClient} />
+    </>
   );
 }
