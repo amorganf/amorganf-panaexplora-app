@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { query } from "../../lib/db";
+import { query } from "../../../lib/db";
 export const dynamic = "force-dynamic";
 export default async function CategoriesPage() {
   const r = await query<{

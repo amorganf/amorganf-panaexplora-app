@@ -1,6 +1,6 @@
 import CrudManager from "../../../components/admin/CrudManager";
 
-import { query } from "../../../lib/db";
+import { query } from "../../../../lib/db";
 export default async function Articles() {
   const [categories, provinces] = await Promise.all([
     query<{ id: string; name: string }>(

@@ -3,7 +3,13 @@ import { cache } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SignJWT, jwtVerify } from "jose";
-import { query } from "./db";
+import { query } from "@/lib/db";
+
+import {
+  SESSION_AUDIENCE as AUDIENCE,
+  SESSION_COOKIE as COOKIE,
+  SESSION_ISSUER as ISSUER,
+} from "@/lib/session-config";
 
 export type Role = "SUPERADMIN" | "ADMIN" | "EDITOR";
 export const ALL_ROLES: readonly Role[] = ["SUPERADMIN", "ADMIN", "EDITOR"];
@@ -11,10 +17,9 @@ export const ALL_ROLES: readonly Role[] = ["SUPERADMIN", "ADMIN", "EDITOR"];
 const isProd = process.env.NODE_ENV === "production";
 // El prefijo __Host- obliga a que la cookie sea Secure, sin dominio y con path=/,
 // lo que impide que un subdominio la sobrescriba. Solo en producción (HTTPS).
-const COOKIE = isProd ? "__Host-ppd_session" : "ppd_session";
+
 const MAX_AGE = 8 * 60 * 60; // 8 horas
-const ISSUER = "panaexplora";
-const AUDIENCE = "panaexplora-admin";
+
 
 function getSecret() {
   const value = process.env.AUTH_SECRET;
@@ -58,6 +63,7 @@ const readToken = cache(async () => {
       issuer: ISSUER,
       audience: AUDIENCE,
     });
+
     if (
       typeof payload.sub !== "string" ||
       !/^[1-9]\d*$/.test(payload.sub) ||
@@ -65,7 +71,9 @@ const readToken = cache(async () => {
     ) {
       return null;
     }
+
     return { userId: payload.sub, version: payload.v };
+    
   } catch {
     return null;
   }

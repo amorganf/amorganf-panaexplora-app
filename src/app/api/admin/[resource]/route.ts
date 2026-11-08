@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcryptjs";
-import { query } from "../../../lib/db";
-import { ALL_ROLES, requireAdmin, type Role } from "../../../lib/auth";
-import { slugify } from "../../../lib/slug";
-import { destinationSchema, articleSchema } from "../../../lib/validators";
+import { query } from "../../../../lib/db";
+import { ALL_ROLES, requireAdmin, type Role } from "../../../../lib/auth";
+import { slugify } from "../../../../lib/slug";
+import { destinationSchema, articleSchema } from "../../../../lib/validators";
 
 type Ctx = { params: Promise<{ resource: string }> };
 type Mode = "read" | "write";

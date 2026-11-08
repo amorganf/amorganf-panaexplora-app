@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { query } from "../../lib/db";
-import { requireAdminOrRedirect, type Role } from "../../lib/auth";
+import { query } from "../../../lib/db";
+import { requireAdminOrRedirect, type Role } from "../../../lib/auth";
 
 export const metadata: Metadata = { title: "Dashboard" };
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { query } from "../../lib/db";
+import { query } from "../../../lib/db";
 
 import ArticleCard, {
   type ArticleCardData,

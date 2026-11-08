@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getSettings } from "../../lib/data/settings";
+import { getSettings } from "../../../lib/data/settings";
 
 // Solo los campos que contienen textos legales.
 // Ajusta los nombres a los de tu tabla de ajustes.

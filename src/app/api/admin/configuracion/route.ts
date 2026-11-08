@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { getCurrentUser, type Role } from "../../../lib/auth";
-import { pool } from "../../../lib/db";
-import { getSettings, settingKeys } from "../../../lib/data/settings";
+import { getCurrentUser, type Role } from "../../../../lib/auth";
+import { pool } from "../../../../lib/db";
+import { getSettings, settingKeys } from "../../../../lib/data/settings";
 
 // Igual que en el menú del admin: solo SUPERADMIN ve "Configuración".
 const ALLOWED: readonly Role[] = ["SUPERADMIN"];

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { requireAdmin } from "../../../lib/auth";
-import { query } from "../../../lib/db";
+import { requireAdmin } from "../../../../lib/auth";
+import { query } from "../../../../lib/db";
 const keys = new Set(["hero", "featured", "categories", "latest"]);
 async function authorized() {
   return requireAdmin(["SUPERADMIN", "ADMIN"]);

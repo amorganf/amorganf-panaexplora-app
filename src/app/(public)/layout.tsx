@@ -1,7 +1,7 @@
 import Header from "../components/public/Header";
 import Footer from "../components/public/Footer";
 import CookieConsent from "../components/CookieConsent";
-import { getTrackingConfig } from "../lib/data/settings";
+import { getTrackingConfig } from "../../lib/data/settings";
 
 // Los ajustes se leen de la base de datos como máximo cada 5 minutos.
 // Al guardarlos desde el admin, llama a revalidatePath("/", "layout")

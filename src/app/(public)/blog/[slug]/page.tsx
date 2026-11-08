@@ -1,7 +1,7 @@
-import { seoMetadata, jsonLd, absoluteUrl } from "../../../lib/seo";
+import { seoMetadata, jsonLd, absoluteUrl } from "../../../../lib/seo";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { query } from "../../../lib/db";
+import { query } from "../../../../lib/db";
 
 type Props = { params: Promise<{ slug: string }> };
 type A = {

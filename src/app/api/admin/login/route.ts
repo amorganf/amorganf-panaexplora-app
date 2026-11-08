@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { query } from "../../../lib/db";
-import { createSession } from "../../../lib/auth";
+
+import { query } from "@/lib/db";
+import { createSession } from "@/lib/auth";
 
 const MAX_ATTEMPTS = 5;
 const LOCK_MINUTES = 15;

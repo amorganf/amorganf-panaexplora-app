@@ -1,4 +1,4 @@
-import { requireAdminOrRedirect, type Role } from "../../lib/auth";
+import { requireAdminOrRedirect, type Role } from "../../../lib/auth";
 import { logoutAction } from "@/app/admin/logout-action";
 import AdminNav, { type NavItem } from "./AdminNav";
 

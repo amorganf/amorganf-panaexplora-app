@@ -1,5 +1,5 @@
 import CrudManager from "../../../components/admin/CrudManager";
-import { query } from "../../../lib/db";
+import { query } from "../../../../lib/db";
 export default async function Destinations() {
   const [p, c, d] = await Promise.all([
     query<{ id: string; name: string }>(

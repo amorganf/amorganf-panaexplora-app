@@ -1,27 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { query } from "../../lib/db";
 import ArticleListing from "../public/ArticleListing";
+
+import {
+  Section, 
+  Article, 
+  Category, 
+  getHomeSections,
+  getFeaturedArticles,
+  getCategoriesWithArticles
+} from "../../../lib/queries/home"
 
 type Search = Record<string, string | string[] | undefined>;
 
-type Section = {
-  section_key: string;
-  title: string;
-  enabled: boolean;
-  sort_order: number;
-};
-
-type Article = {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string | null;
-  cover_image: string | null;
-  category_name: string | null;
-};
-
-type Category = { id: string; name: string; slug: string; count: string };
 
 const plural = (n: string, singular: string, pluralWord: string) =>
   `${n} ${n === "1" ? singular : pluralWord}`;
@@ -31,37 +22,13 @@ export default async function HomeSections({
 }: {
   searchParams: Promise<Search>;
 }) {
-  const sections = await query<Section>(
-    `SELECT section_key, title, enabled, sort_order
-     FROM home_sections
-     WHERE enabled = TRUE
-     ORDER BY sort_order, section_key`,
-  );
-
+  const sections = await getHomeSections();
   const enabled = new Set(sections.rows.map((s) => s.section_key));
 
   const [featured, categories] = await Promise.all([
-    enabled.has("featured")
-      ? query<Article>(
-          `SELECT a.id, a.title, a.slug, a.excerpt, a.cover_image, c.name AS category_name
-           FROM articles a
-           LEFT JOIN categories c ON c.id = a.category_id
-           WHERE a.status = 'PUBLISHED' AND a.featured = TRUE
-           ORDER BY a.published_at DESC NULLS LAST, a.id DESC
-           LIMIT 6`,
-        )
-      : Promise.resolve({ rows: [] as Article[] }),
-    enabled.has("categories")
-      ? query<Category>(
-          `SELECT c.id, c.name, c.slug, COUNT(a.id)::text AS count
-           FROM categories c
-           JOIN articles a ON a.category_id = c.id AND a.status = 'PUBLISHED'
-           WHERE c.active = TRUE
-           GROUP BY c.id, c.name, c.slug
-           HAVING COUNT(a.id) > 0
-           ORDER BY c.name`,
-        )
-      : Promise.resolve({ rows: [] as Category[] }),
+    enabled.has("featured") ? getFeaturedArticles() : Promise.resolve({ rows: [] as Article[] }),
+    
+    enabled.has("categories") ? getCategoriesWithArticles() : Promise.resolve({ rows: [] as Category[] }),
   ]);
 
   if (sections.rows.length === 0) {
@@ -111,7 +78,7 @@ export default async function HomeSections({
                 {featured.rows.length > 0 ? (
                   <div className="row g-4">
                     {featured.rows.map((a) => (
-                      <div className="col-md-6 col-lg-4" key={a.id}>
+                      <div className="col-md-6 col-lg-3" key={a.id}>
                         <article className="card destination-card h-100 position-relative">
                           {a.cover_image ? (
                             <div
@@ -143,12 +110,14 @@ export default async function HomeSections({
                                 {a.title}
                               </Link>
                             </h3>
-                            {a.excerpt && (
+                            {/*a.excerpt && (
                               <p className="text-secondary">{a.excerpt}</p>
-                            )}
+                            )*/}
+                            {/* 
                             <span className="mt-auto fw-bold text-primary">
                               Leer artículo
                             </span>
+                            */}
                           </div>
                         </article>
                       </div>

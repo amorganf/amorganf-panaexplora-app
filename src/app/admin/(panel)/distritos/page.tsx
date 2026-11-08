@@ -1,5 +1,5 @@
 import CrudManager from "../../../components/admin/CrudManager";
-import { query } from "../../../lib/db";
+import { query } from "../../../../lib/db";
 export default async function Districts() {
   const { rows } = await query<{ id: string; name: string }>(
     "SELECT id,name FROM provinces ORDER BY name",

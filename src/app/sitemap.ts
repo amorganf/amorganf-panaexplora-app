@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { query } from "./lib/db";
+import { query } from "../lib/db";
 
 export const revalidate = 3600;
 

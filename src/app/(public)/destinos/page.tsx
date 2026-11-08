@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { query } from "../../lib/db";
+import { query } from "../../../lib/db";
 import DestinationCard from "../../components/public/DestinationCard";
 export const metadata: Metadata = { title: "Destinos turísticos de Panamá" };
 export const revalidate = 60;

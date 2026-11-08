@@ -1,7 +1,7 @@
-import { seoMetadata } from "../../../lib/seo";
+import { seoMetadata } from "../../../../lib/seo";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { query } from "../../../lib/db";
+import { query } from "../../../../lib/db";
 import ArticleListing from "../../../components/public/ArticleListing";
 export const dynamic = "force-dynamic";
 type Props = {
